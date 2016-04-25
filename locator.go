@@ -17,6 +17,7 @@ func main() {
         })
 
         v1.GET("/import", tasks.ImportAreas)
+        v1.GET("/search", tasks.Search)
     }
 
     r.Run()

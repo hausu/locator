@@ -6,21 +6,8 @@ import (
     "encoding/json"
     "gopkg.in/olivere/elastic.v3"
     "os"
+    "github.com/hausu/locator/objects"
 )
-
-type Location struct {
-    Lat float32 `json:"lat"`
-    Lon float32 `json:"lon"`
-}
-
-type AreaType struct {
-    City string `json:"city"`
-    Country string `json:"country"`
-    Name string `json:"name"`
-    Slug string `json:"slug"`
-    Area float32 `json:"area"`
-    Location *Location `json:"location"`
-}
 
 func ImportAreas(c *gin.Context) {
     file, e := ioutil.ReadFile("")
@@ -86,7 +73,7 @@ func ImportAreas(c *gin.Context) {
         return
     }
 
-    var areas []AreaType
+    var areas []objects.AreaType
     json.Unmarshal(file, &areas)
 
     for _, area := range areas {
