@@ -3,9 +3,7 @@ package tasks
 import (
     "github.com/gin-gonic/gin"
     "gopkg.in/olivere/elastic.v3"
-    "os"
     "github.com/hausu/locator/objects"
-    "log"
     "encoding/json"
     "strconv"
     "github.com/hashicorp/golang-lru"
@@ -35,16 +33,7 @@ func Search(c *gin.Context) {
         return
     }
 
-    client, err := elastic.NewClient(
-    elastic.SetURL(os.Getenv("ELASTIC_HOST")),
-    elastic.SetSniff(false),
-    elastic.SetTraceLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
-    )
-
-    if err != nil {
-        c.JSON(500, err.Error())
-        return
-    }
+    client, _ := c.MustGet("elastic").(*elastic.Client)
 
     q := elastic.NewMatchAllQuery()
     geoQ := elastic.NewGeoDistanceQuery("location")

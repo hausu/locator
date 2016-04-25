@@ -3,10 +3,12 @@ package main
 import (
     "github.com/gin-gonic/gin"
     "github.com/hausu/locator/tasks"
+    "github.com/hausu/locator/services"
 )
 
 func main() {
     r := gin.Default()
+    r.Use(services.ElasticMiddleWare())
 
     v1 := r.Group("api/v1")
     {
