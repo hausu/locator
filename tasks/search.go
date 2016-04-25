@@ -42,7 +42,7 @@ func Search(c *gin.Context) {
 
     geoQ.Lat(qLat)
     geoQ.Lon(qLon)
-    geoQ.Distance("10km")
+    geoQ.Distance("15km")
 
     r, err := client.Search().Index("areas").Type("area").Query(q).PostFilter(geoQ).Pretty(true).Do()
 

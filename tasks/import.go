@@ -5,27 +5,18 @@ import (
     "io/ioutil"
     "encoding/json"
     "gopkg.in/olivere/elastic.v3"
-    "os"
     "github.com/hausu/locator/objects"
 )
 
 func ImportAreas(c *gin.Context) {
-    file, e := ioutil.ReadFile("")
-
-    if e != nil {
-        c.JSON(500, e.Error())
-        return
-    }
-
-    client, err := elastic.NewClient(
-        elastic.SetURL(os.Getenv("ELASTIC_HOST")),
-        elastic.SetSniff(false),
-    )
+    file, err := ioutil.ReadFile("")
 
     if err != nil {
         c.JSON(500, err.Error())
         return
     }
+
+    client, _ := c.MustGet("elastic").(*elastic.Client)
 
     _, err = client.DeleteIndex("areas").Do()
 
