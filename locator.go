@@ -2,6 +2,7 @@ package main
 
 import (
     "github.com/gin-gonic/gin"
+    "github.com/hausu/locator/tasks"
 )
 
 func main() {
@@ -14,6 +15,8 @@ func main() {
                 "message": "pong",
             })
         })
+
+        v1.GET("/import", tasks.ImportAreas)
     }
 
     r.Run()
