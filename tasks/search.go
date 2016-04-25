@@ -8,6 +8,8 @@ import (
     "log"
     "encoding/json"
     "strconv"
+    "github.com/hashicorp/golang-lru"
+    "fmt"
 )
 
 type SearchResults struct {
@@ -15,9 +17,23 @@ type SearchResults struct {
     Areas *[]objects.AreaType
 }
 
+var lruCache 	*lru.Cache
+
+func init() {
+    lruCache, _ = lru.New(65000)
+}
+
 func Search(c *gin.Context) {
     lat := c.Query("lat")
     lon := c.Query("lon")
+
+    cacheKey := fmt.Sprintf("%s_%s", lat, lon)
+
+    if lruCache.Contains(cacheKey) {
+        buffer, _ := lruCache.Get(cacheKey)
+        c.JSON(200, buffer)
+        return
+    }
 
     client, err := elastic.NewClient(
     elastic.SetURL(os.Getenv("ELASTIC_HOST")),
@@ -62,6 +78,8 @@ func Search(c *gin.Context) {
     }
 
     results.Hits = r.Hits.TotalHits
+
+    _ = lruCache.Add(cacheKey, results)
 
     c.JSON(200, results)
 }
