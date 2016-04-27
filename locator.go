@@ -1,26 +1,26 @@
 package main
 
 import (
-    "github.com/gin-gonic/gin"
-    "github.com/hausu/locator/tasks"
-    "github.com/hausu/locator/services"
+	"github.com/hausu/locator/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	"github.com/hausu/locator/services"
+	"github.com/hausu/locator/tasks"
 )
 
 func main() {
-    r := gin.Default()
-    r.Use(services.ElasticMiddleWare())
+	r := gin.Default()
+	r.Use(services.ElasticMiddleWare())
 
-    v1 := r.Group("api/v1")
-    {
-        v1.GET("/ping", func(c *gin.Context) {
-            c.JSON(200, gin.H{
-                "message": "pong",
-            })
-        })
+	v1 := r.Group("api/v1")
+	{
+		v1.GET("/ping", func(c *gin.Context) {
+			c.JSON(200, gin.H{
+				"message": "pong",
+			})
+		})
 
-        v1.GET("/import", tasks.ImportAreas)
-        v1.GET("/search", tasks.Search)
-    }
+		v1.GET("/import", tasks.ImportAreas)
+		v1.GET("/search", tasks.Search)
+	}
 
-    r.Run()
+	r.Run()
 }
