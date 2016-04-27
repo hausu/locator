@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/hausu/locator/Godeps/_workspace/src/gopkg.in/olivere/elastic.v3/uritemplates"
+	"gopkg.in/olivere/elastic.v3/uritemplates"
 )
 
 // ExistsService checks for the existence of a document using HEAD.

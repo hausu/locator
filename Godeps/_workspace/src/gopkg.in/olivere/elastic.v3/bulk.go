@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/hausu/locator/Godeps/_workspace/src/gopkg.in/olivere/elastic.v3/uritemplates"
+	"gopkg.in/olivere/elastic.v3/uritemplates"
 )
 
 // BulkService allows for batching bulk requests and sending them to

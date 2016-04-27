@@ -8,7 +8,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/hausu/locator/Godeps/_workspace/src/github.com/gin-gonic/gin/binding"
+	"github.com/gin-gonic/gin/binding"
 )
 
 const ENV_GIN_MODE = "GIN_MODE"

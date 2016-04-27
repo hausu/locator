@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/hausu/locator/Godeps/_workspace/src/gopkg.in/olivere/elastic.v3/uritemplates"
+	"gopkg.in/olivere/elastic.v3/uritemplates"
 )
 
 // UpdateByQueryService is documented at https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html.

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/hausu/locator/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 	"github.com/hausu/locator/services"
 	"github.com/hausu/locator/tasks"
 )
