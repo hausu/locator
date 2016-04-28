@@ -44,7 +44,9 @@ func Search(c *gin.Context) {
     geoQ.Lon(qLon)
     geoQ.Distance("15km")
 
-    r, err := client.Search().Index("areas").Type("area").Query(q).PostFilter(geoQ).Pretty(true).Do()
+    sorter := elastic.NewGeoDistanceSort("location").Point(qLat, qLon)
+
+    r, err := client.Search().Index("areas").Type("area").Query(q).PostFilter(geoQ).SortBy(sorter).From(0).Size(1).Pretty(true).Do()
 
     if err != nil {
         c.JSON(500, err.Error())

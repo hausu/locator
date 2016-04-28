@@ -9,7 +9,7 @@ import (
 )
 
 func ImportAreas(c *gin.Context) {
-    file, err := ioutil.ReadFile("")
+    file, err := ioutil.ReadFile("/Users/ssola/Workspace/go/src/github.com/hausu/locator_data/gb/london.json")
 
     if err != nil {
         c.JSON(500, err.Error())
@@ -18,12 +18,7 @@ func ImportAreas(c *gin.Context) {
 
     client, _ := c.MustGet("elastic").(*elastic.Client)
 
-    _, err = client.DeleteIndex("areas").Do()
-
-    if err != nil {
-        c.JSON(500, err.Error())
-        return
-    }
+    _, _ = client.DeleteIndex("areas").Do()
 
     mapping := `{
         "settings":{
